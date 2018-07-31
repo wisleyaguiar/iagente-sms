@@ -4,6 +4,8 @@ namespace IagenteSms\IagenteSms\Models;
 
 use SoapClient;
 use Exception;
+use Illuminate\Support\Collection;
+use ReflectionClass;
 
 class Sms
 {
@@ -28,9 +30,11 @@ class Sms
 
     /**
      * Sms constructor.
+     * @param \Illuminate\Config\Repository $config
      */
-    public function __construct()
+    public function __construct(/*ConfigRepository */ $config)
     {
+        $this->config = $config;
         $this->ws = new SoapClient(NULL,$this->options);
     }
 
@@ -41,7 +45,7 @@ class Sms
     {
         try {
 
-            $autenticacao = $this->ws->Auth(config('iagente.username'),config('iagente.password'));
+            $autenticacao = $this->ws->Auth($this->config->get('iagente.username'),$this->config->get('iagente.password'));
             if($autenticacao[1] == 1){
                 return true;
             } else {
