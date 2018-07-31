@@ -1,0 +1,35 @@
+{
+    "name": "wisleyaguiar/iagente-sms",
+    "description": "Utilização do serviço de SMS oferecido pelo Iagente",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Wisley Aguiar",
+            "email": "wisleyaguiar@hotmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "illuminate/contracts": "~5.1",
+        "illuminate/http": "~5.1",
+        "illuminate/support": "~5.1"
+    },
+    "require-dev": {
+        "illuminate/config": "^5.1,<5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "IagenteSms\\IagenteSms\\": "src/IagenteSms/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.5-dev"
+        },
+        "laravel": {
+            "providers": [
+                "IagenteSms\\IagenteSms\\Providers\\IagenteSmsServiceProvider"
+            ]
+        }
+    }
+}
