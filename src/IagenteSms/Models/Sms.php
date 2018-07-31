@@ -6,6 +6,7 @@ use SoapClient;
 use Exception;
 use Illuminate\Support\Collection;
 use ReflectionClass;
+use DateTime;
 
 class Sms
 {
@@ -68,6 +69,37 @@ class Sms
                     return $saldo[2];
                 } else {
                     throw new Exception('Não foi possível recuperar o saldo da conta');
+                }
+
+            } else {
+                throw new Exception($this->autenticar());
+            }
+
+        } catch (Exception $e){
+            return $e->getMessage();
+        }
+    }
+
+    /**
+     * @param string $metodo
+     * @param int $destinatario
+     * @param $mensagem
+     * @param DateTime|null $data
+     * @param null $codigo
+     * @return array|string
+     */
+    public function enviar_sms($metodo = "avulso",$destinatario = 0, $mensagem, DateTime $data = null, $codigo = null)
+    {
+        try {
+
+            if($this->autenticar()){
+
+                $enviarSms = $this->ws->enviar_sms($metodo,$destinatario,$mensagem,($data == null ? '' : $data->format("Y-m-d H:i:s")),($codigo == null ? '' : $codigo));
+
+                if($enviarSms[1] == 1){
+                    return ['id' => $enviarSms[3], 'message' => $enviarSms[2]];
+                } else {
+                    throw new Exception($enviarSms[2]);
                 }
 
             } else {
