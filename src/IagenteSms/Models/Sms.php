@@ -41,7 +41,7 @@ class Sms
     {
         try {
 
-            $autenticacao = $this->ws->Auth($this->config->get('iagente.username'),$this->config->get('iagente.password'));
+            $autenticacao = $this->ws->Auth($this->config->get('username'),$this->config->get('password'));
             if($autenticacao[1] == 1){
                 return true;
             } else {
