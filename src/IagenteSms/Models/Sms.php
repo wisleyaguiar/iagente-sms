@@ -25,16 +25,12 @@ class Sms
      */
     protected $ws;
 
-    /** @var \Illuminate\Config\Repository */
-    protected $config;
-
     /**
      * Sms constructor.
      * @param \Illuminate\Config\Repository $config
      */
-    public function __construct(/*ConfigRepository */ $config)
+    public function __construct()
     {
-        $this->config = $config;
         $this->ws = new SoapClient(NULL,$this->options);
     }
 
@@ -45,7 +41,7 @@ class Sms
     {
         try {
 
-            $autenticacao = $this->ws->Auth($this->config->get('iagente.username'),$this->config->get('iagente.password'));
+            $autenticacao = $this->ws->Auth(config('iagente.username'),config('iagente.password'));
             if($autenticacao[1] == 1){
                 return true;
             } else {
