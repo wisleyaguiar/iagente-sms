@@ -111,4 +111,33 @@ class Sms
         }
     }
 
+    /**
+     * @param $nome
+     * @param $celular
+     * @param $id_grupo
+     * @return array|string
+     */
+    public function adicionar_contato($nome, $celular, $id_grupo)
+    {
+        try {
+
+            if($this->autenticar()){
+
+                $enviarSms = $this->ws->adicionar_contato($nome,$celular,$id_grupo);
+
+                if($enviarSms[1] == 1){
+                    return ['message' => $enviarSms[2]];
+                } else {
+                    throw new Exception($enviarSms[2]);
+                }
+
+            } else {
+                throw new Exception($this->autenticar());
+            }
+
+        } catch (Exception $e){
+            return $e->getMessage();
+        }
+    }
+
 }

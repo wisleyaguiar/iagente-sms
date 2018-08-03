@@ -1,18 +1,22 @@
 {
     "name": "wisleyaguiar/iagente-sms",
-    "description": "Utilização do serviço de SMS oferecido pelo Iagente",
+    "description": "Utilização do serviço de SMS oferecido pelo Iagente usando o Web Service em SOAP",
     "license": "MIT",
     "authors": [
         {
             "name": "Wisley Aguiar",
-            "email": "wisleyaguiar@hotmail.com"
+            "email": "wisleyaguiar@hotmail.com",
+            "homepage": "http://aguiarweb.com.br",
+            "role": "Developer"
         }
     ],
     "require": {
         "php": ">=5.5.9",
         "illuminate/contracts": "~5.1",
         "illuminate/http": "~5.1",
-        "illuminate/support": "~5.1"
+        "illuminate/support": "~5.1",
+        "ext-soap": "*",
+        "wisleyaguiar/iagente-sms":"dev-master"
     },
     "require-dev": {
         "illuminate/config": "^5.1,<5.7"
@@ -23,9 +27,6 @@
         }
     },
     "extra": {
-        "branch-alias": {
-            "dev-master": "2.5-dev"
-        },
         "laravel": {
             "providers": [
                 "IagenteSms\\IagenteSms\\Providers\\IagenteSmsServiceProvider"
